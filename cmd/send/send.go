@@ -18,11 +18,7 @@ func failOnError(err error, msg string) {
 func main() {
 	url := os.Args[1]
 	messageCount, err := strconv.Atoi(os.Args[2])
-	queueName := "hello"
-	if val, ok := os.Args[3]; ok {
-		queueName = val
-	}
-	failOnError(err, "Failed to parse second arg as messageCount : int")
+	queueName := os.Args[3]
 	conn, err := amqp.Dial(url)
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
